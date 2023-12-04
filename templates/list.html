@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2>Liste des utilisateurs</h2>
+    
+    <!-- Search Bar -->
+    <form action="{{ url_for('list') }}" method="GET">
+        <input type="text" name="search_query" placeholder="Rechercher un utilisateur...">
+        <button type="submit">Rechercher</button>
+    </form>
+    
+    <!-- Your user list or any other content -->
+{% endblock %}
