@@ -4,10 +4,121 @@
     <h2>Liste des utilisateurs</h2>
     
     <!-- Search Bar -->
-    <form action="{{ url_for('list') }}" method="GET">
-        <input type="text" name="search_query" placeholder="Rechercher un utilisateur...">
-        <button type="submit">Rechercher</button>
+    <form id="searchForm" method="GET">
+        <input type="text" id="searchInput" name="search_query" placeholder="Rechercher un utilisateur...">
     </form>
     
-    <!-- Your user list or any other content -->
+    <!-- Display Users in a Table -->
+    <table id="usersTable" border="1">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+            <th>Change Password</th>
+        </tr>
+        {% for user in users %}
+        <tr class="userRow">
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+            <td>{{ user[3] }}</td>
+            <td>{{ user[4] }}</td>
+            <td>{{ user[5] }}</td>
+            <td><button class="deleteButton">Supprimer</button></td>
+            <td>
+                <div class="passwordChange">
+                    <input type="password" class="newPasswordInput" placeholder="Nouveau mot de passe">
+                    <button class="confirmPasswordChange">OK</button>
+                    <span class="passwordChangeMessage" style="display:none">Mot de passe changé avec succès</span>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        // Function to filter and display users based on search query
+        function searchUsers(searchQuery) {
+            const userRows = document.getElementsByClassName('userRow');
+            
+            for (const row of userRows) {
+                const username = row.children[1].textContent;
+                const name = row.children[2].textContent;
+                const surname = row.children[3].textContent;
+                const email = row.children[4].textContent;
+                const phone = row.children[5].textContent;
+                
+                if (
+                    username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    surname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    phone.toLowerCase().includes(searchQuery.toLowerCase())
+                ) {
+                    row.style.display = ''; // Show the row if it matches the search
+                } else {
+                    row.style.display = 'none'; // Hide the row if it doesn't match the search
+                }
+            }
+        }
+
+        window.onload = function() {
+             // Attach event listener to the delete buttons
+             const deleteButtons = document.querySelectorAll('.deleteButton');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const userRow = this.parentNode.parentNode;
+                    const userId = userRow.cells[0].textContent; // Assuming the ID is in the first cell
+
+                    // Send an AJAX request to delete the user by ID
+                    fetch(`/delete/${userId}`, { method: 'DELETE' })
+                        .then(response => {
+                            if (response.ok) {
+                                userRow.remove(); // Remove the row if deletion is successful
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+            
+            const confirmPasswordChangeButtons = document.querySelectorAll('.confirmPasswordChange');
+            confirmPasswordChangeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const newPasswordInput = this.previousElementSibling;
+                    const userRow = this.parentNode.parentNode;
+                    const userId = userRow.cells[0].textContent; // Assuming the ID is in the first cell
+                    const newPassword = newPasswordInput.value;
+
+                    // Send an AJAX request to change the user's password
+                    fetch(`/change_password/${userId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ password: newPassword })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            newPasswordInput.value = ''; // Clear the input field
+                            const successMessage = this.nextElementSibling; // Assuming the message span follows the button
+                            successMessage.style.display = 'inline'; // Show the success message
+                            setTimeout(() => {
+                                successMessage.style.display = 'none'; // Hide the success message after a few seconds
+                            }, 3000);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                searchUsers(searchInput.value);
+            });
+        };
+    
+    
+    </script>
 {% endblock %}
