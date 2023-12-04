@@ -9,32 +9,44 @@
     </form>
     
     <div id="addUserForm">
-        <h3>Ajouter un utilisateur</h3>
-
-            {% if session['admin'] == 2 or session['admin'] == 1 %}
-                <form action="/add_user" method="POST" enctype="multipart/form-data">
-                    <label for="username">Nom d'utilisateur :</label>
-                    <input type="text" id="username" name="username" required><br><br>
-            
-                    <label for="name">Nom :</label>
-                    <input type="text" id="name" name="name" required><br><br>
-            
-                    <label for="surname">Prénom :</label>
-                    <input type="text" id="surname" name="surname" required><br><br>
-            
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password" required><br><br>
-            
-                    <label for="email">Email :</label>
-                    <input type="email" id="email" name="email" required><br><br>
-            
-                    <label for="phone">Numéro de téléphone :</label>
-                    <input type="text" id="phone" name="phone" required><br><br>
-            
-                    <input type="submit" value="Ajouter un utilisateur">
-                </form>
+        <table border="1">
+            <tr>
+                <th colspan="2">Ajouter un utilisateur</th>
+            </tr>
+            {% if session['admin'] == 1 or session['admin'] == 2 %}
+            <form action="/add_user" method="POST" enctype="multipart/form-data">
+                <tr>
+                    <td><label for="username">Nom d'utilisateur :</label></td>
+                    <td><input type="text" id="username" name="username" required></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Nom :</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="surname">Prénom :</label></td>
+                    <td><input type="text" id="surname" name="surname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Mot de passe :</label></td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email :</label></td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Numéro de téléphone :</label></td>
+                    <td><input type="text" id="phone" name="phone" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Ajouter un utilisateur"></td>
+                </tr>
+            </form>
             {% endif %}
+        </table>
     </div>
+    
 
     <!-- Display Users in a Table -->
     <table id="usersTable" border="1">
