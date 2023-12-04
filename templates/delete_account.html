@@ -2,5 +2,24 @@
 
 {% block content %}
     <h2>Page de suppression du compte</h2>
+    <button class="deleteButton" id="deleteAccount">Supprimer</button>
     <!-- Votre formulaire de connexion ou tout autre contenu -->
+    <script>
+        document.getElementById('deleteAccount').addEventListener('click', function() {
+            // Envoyer une requête au serveur pour supprimer le compte de l'utilisateur connecté
+            fetch('/delete_account2', {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Si la suppression est réussie, déconnecter l'utilisateur
+                    window.location.href = '/';
+                } else {
+                    console.error('Erreur lors de la suppression du compte');
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+        });
+    </script>
 {% endblock %}
+

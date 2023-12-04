@@ -8,6 +8,34 @@
         <input type="text" id="searchInput" name="search_query" placeholder="Rechercher un utilisateur...">
     </form>
     
+    <div id="addUserForm">
+        <h3>Ajouter un utilisateur</h3>
+
+            {% if session['admin'] == 2 or session['admin'] == 1 %}
+                <form action="/add_user" method="POST" enctype="multipart/form-data">
+                    <label for="username">Nom d'utilisateur :</label>
+                    <input type="text" id="username" name="username" required><br><br>
+            
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required><br><br>
+            
+                    <label for="surname">Prénom :</label>
+                    <input type="text" id="surname" name="surname" required><br><br>
+            
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required><br><br>
+            
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required><br><br>
+            
+                    <label for="phone">Numéro de téléphone :</label>
+                    <input type="text" id="phone" name="phone" required><br><br>
+            
+                    <input type="submit" value="Ajouter un utilisateur">
+                </form>
+            {% endif %}
+    </div>
+
     <!-- Display Users in a Table -->
     <table id="usersTable" border="1">
         <tr>
@@ -15,10 +43,13 @@
             <th>Username</th>
             <th>Name</th>
             <th>Surname</th>
+            <th>password</th>
             <th>Email</th>
             <th>Phone Number</th>
+            <th>Admin</th>
             <th>Action</th>
             <th>Change Password</th>
+            <th>Upgrade/Downgrade</th>
         </tr>
         {% for user in users %}
         <tr class="userRow">
@@ -28,13 +59,35 @@
             <td>{{ user[3] }}</td>
             <td>{{ user[4] }}</td>
             <td>{{ user[5] }}</td>
-            <td><button class="deleteButton">Supprimer</button></td>
+            <td>{{ user[6] }}</td>
+            <td>{{ user[7] }}</td>
+            <td>
+                {% if session['admin'] == 2 %}
+                    <button class="deleteButton">Supprimer</button>
+                {% endif %}
+            </td>
             <td>
                 <div class="passwordChange">
-                    <input type="password" class="newPasswordInput" placeholder="Nouveau mot de passe">
-                    <button class="confirmPasswordChange">OK</button>
-                    <span class="passwordChangeMessage" style="display:none">Mot de passe changé avec succès</span>
+                    {% if session['admin'] == 2 %}
+                        <input type="password" class="newPasswordInput" placeholder="Nouveau mot de passe">
+                        <button class="confirmPasswordChange">OK</button>
+                        <span class="passwordChangeMessage" style="display:none">Mot de passe changé avec succès</span>
+                    {% endif %}
                 </div>
+            </td>
+            <td>
+                {% if session['admin'] == 2 %}
+                    {% if user[7] == 0 %}
+                        <button class="downgradeButton" disabled>Downgrade</button>
+                        <button class="upgradeButton">Upgrade</button>
+                    {% elif user[7] == 1 %}
+                        <button class="downgradeButton">Downgrade</button>
+                        <button class="upgradeButton" disabled>Upgrade</button>
+                    {% else %}
+                        <button class="downgradeButton" disabled>Downgrade</button>
+                        <button class="upgradeButton" disabled>Upgrade</button>
+                    {% endif %}
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
@@ -84,12 +137,13 @@
                         .catch(error => console.error('Error:', error));
                 });
             });
-            
+
             const confirmPasswordChangeButtons = document.querySelectorAll('.confirmPasswordChange');
+
             confirmPasswordChangeButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const newPasswordInput = this.previousElementSibling;
-                    const userRow = this.parentNode.parentNode;
+                    const userRow = this.closest('.userRow');
                     const userId = userRow.cells[0].textContent; // Assuming the ID is in the first cell
                     const newPassword = newPasswordInput.value;
 
@@ -107,9 +161,47 @@
                             setTimeout(() => {
                                 successMessage.style.display = 'none'; // Hide the success message after a few seconds
                             }, 3000);
+                        } else {
+                            throw new Error('Failed to change password');
                         }
                     })
                     .catch(error => console.error('Error:', error));
+                });
+            });
+
+            const downgradeButtons = document.querySelectorAll('.downgradeButton');
+            downgradeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const userRow = this.parentNode.parentNode;
+                    const userId = userRow.cells[0].textContent; // Assuming the ID is in the first cell
+
+                    // Send an AJAX request to downgrade the user's admin level
+                    fetch(`/downgrade_user/${userId}`, { method: 'PUT' })
+                        .then(response => {
+                            if (response.ok) {
+                                // Reload the page or update the user interface as needed
+                                location.reload(); // Example: Refresh the page to reflect changes
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                });
+            });
+
+            const upgradeButtons = document.querySelectorAll('.upgradeButton');
+            upgradeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const userRow = this.parentNode.parentNode;
+                    const userId = userRow.cells[0].textContent; // Assuming the ID is in the first cell
+
+                    // Send an AJAX request to upgrade the user's admin level
+                    fetch(`/upgrade_user/${userId}`, { method: 'PUT' })
+                        .then(response => {
+                            if (response.ok) {
+                                // Reload the page or update the user interface as needed
+                                location.reload(); // Example: Refresh the page to reflect changes
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
                 });
             });
 

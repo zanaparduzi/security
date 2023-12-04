@@ -2,5 +2,45 @@
 
 {% block content %}
     <h2>Mise à jour du profil</h2>
-    <!-- Votre formulaire de connexion ou tout autre contenu -->
+    <form action="/upgrade_profil" method="POST">
+        <table border="1">
+            <tr>
+                <th></th>
+                <th>Valeur actuelle</th>
+                <th>Modifier</th>
+            </tr>
+            <tr>
+                <td>Nom d'utilisateur :</td>
+                <td>{{ session['username'] }}</td>
+                <td><input type="text" id="new_username" name="new_username"></td>
+            </tr>
+            <tr>
+                <td>Nom :</td>
+                <td>{{ session['name'] }}</td>
+                <td><input type="text" id="new_name" name="new_name"></td>
+            </tr>
+            <tr>
+                <td>Prénom :</td>
+                <td>{{ session['surname'] }}</td>
+                <td><input type="text" id="new_surname" name="new_surname"></td>
+            </tr>
+            <tr>
+                <td>Email :</td>
+                <td>{{session['email'] }}</td>
+                <td><input type="email" id="new_email" name="new_email"></td>
+            </tr>
+            <tr>
+                <td>Numéro de téléphone :</td>
+                <td>{{ session['phonenumber'] }}</td>
+                <td><input type="text" id="new_phone" name="new_phone"></td>
+            </tr>
+            <tr>
+                <td>Mot de passe :</td>
+                <td>*******</td>
+                <td><input type="password" id="new_password" name="new_password"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Enregistrer les modifications">
+    </form>
 {% endblock %}

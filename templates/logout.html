@@ -3,4 +3,8 @@
 {% block content %}
     <h2>Page de Déconnexion</h2>
     <!-- Votre formulaire de connexion ou tout autre contenu -->
+    <p>Vous êtes sur le point de vous déconnecter.</p>
+    <form action="/logout2" method="POST">
+        <input type="submit" value="Déconnexion">
+    </form>
 {% endblock %}
