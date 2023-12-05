@@ -1,27 +1,31 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
 {% extends 'index.html' %}
 
 {% block content %}
     <h2>Page d'Inscription</h2>
     <!-- Votre formulaire d'inscription ou tout autre contenu -->
     <form action="/register2" method="POST" enctype="multipart/form-data">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="username">Nom d'utilisateur </label>
+        <input type="text" id="username" placeholder ="Entrez votre nom d'utilistateur" name="username" required><br>
 
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <label for="name">Nom </label>
+        <input type="text" id="name" placeholder ="Entrez votre nom" name="name" required><br>
 
-        <label for="surname">Prénom :</label>
-        <input type="text" id="surname" name="surname" required><br><br>
+        <label for="surname">Prénom </label>
+        <input type="text" id="surname" placeholder ="Entrez votre prénom" name="surname" required><br>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="password">Mot de passe </label>
+        <input type="password" id="password" placeholder ="Entrez votre mot de passe" name="password" required><br>
 
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Email </label>
+        <input type="email" id="email" placeholder ="Entrez votre email" name="email" required><br>
 
-        <label for="phone">Numéro de téléphone :</label>
-        <input type="text" id="phone" name="phone" required><br><br>
+        <label for="phone">Numéro de téléphone </label>
+        <input type="text" id="phone" placeholder ="Entrez votre numéro de téléphone" name="phone" required><br>
 
-        <input type="submit" value="S'inscrire">
+        <input type="submit" class="login-button" value="S'inscrire">
     </form>
 {% endblock %}

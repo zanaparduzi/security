@@ -1,0 +1,182 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Light blue background color */
+    color: #333; /* Text color */
+    margin: 0;
+    padding: 0;
+    background-image: url('bg5.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Set a minimum height to cover the entire viewport */
+    margin :0;
+
+}
+
+
+   
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #007bff; /* Primary blue header color */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: rgb(112, 69, 164); /* Title color */
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top:20px;
+    font-size: 3em; /* Adjust the font size as needed */
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+h1:hover {
+    color: rgb(132, 99, 222); 
+}
+
+h2 {
+color: rgb(112, 69, 164); /* Title color */
+text-align: center;
+font-size: 2em; /* Adjust the font size as needed */
+font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+p {
+    text-align: center; /* Align text to the right */
+    margin-left: 20px; /* Add margin on the right to prevent sticking to the side */
+    font-family :Verdana, Geneva, Tahoma, sans-serif;/* Replace 'YourChosenFont' with the actual font name */
+    color :rgb(76, 57, 100)
+}
+
+label {
+   font-family :Verdana, Geneva, Tahoma, sans-serif;/* Replace 'YourChosenFont' with the actual font name */
+    color :rgb(76, 57, 100)
+}
+section {
+    padding: 20px;
+}
+
+footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+form {
+    max-width: 400px; /* Largeur maximale du formulaire */
+    margin: 0 auto; /* Centre le formulaire horizontalement */
+    padding: 20px;
+    background-color: #ffffff7e; /* Fond blanc du formulaire */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form .login-button {
+    background-color: rgb(100, 65, 157); /* Use the same color as the navigation bar buttons */
+    color: #fff; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 4px; /* Rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+form .login-button:hover {
+    background-color: rgb(172, 136, 223); /* Button background color on hover */
+}
+
+/* Style form input and labels (adjust as needed) */
+form label,
+form input {
+    margin: 10px 0;
+    width: 100%;
+}
+
+form input {
+    padding: 10px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 1px; /* Rounded corners */
+    margin-bottom: 1px; /* Spacing between input boxes */
+    border-radius : 5px;
+    background-color: #efeaea;
+    border-color: #333;
+}
+
+
+
+nav {
+    background-color: transparent; /* Navigation bar background color */
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the navigation bar buttons */
+nav a {
+    color: rgb(112, 69, 164);
+    margin: 0 10px;
+    padding: 4px 8px; /* Adjust padding as needed */
+    text-decoration: none;
+    /*border-radius: 4px;*/
+    background-color: transparent; /* Button background color */
+    transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+nav a:hover {
+    color: rgb(197, 177, 229);
+    /*background-color: rgb(180, 148, 229);*/
+}
+
+nav {
+    background-color: transparent; /* Darker blue navigation bar color */
+    padding: 10px;
+}
+.nav button:last-child {
+    border-right: none;
+}
+a {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+a:hover {
+    color: #0c3158; 
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh; /* 100% of the viewport height */
+}
+.deleteButton {
+    background-color: rgb(100, 65, 157); /* Use the same color as the navigation bar buttons */
+    color: #fff; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 4px; /* Rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.deleteButton:hover{
+    background-color: rgb(172, 136, 223); /* Button background color on hover */
+}

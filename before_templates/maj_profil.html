@@ -1,8 +1,3 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="icon" href="/static/logo.ico">
-</head>
-
 {% extends 'index.html' %}
 
 {% block content %}
@@ -15,37 +10,37 @@
                 <th>Modifier</th>
             </tr>
             <tr>
-                <td>Nom d'utilisateur</td>
+                <td>Nom d'utilisateur :</td>
                 <td>{{ session['username'] }}</td>
                 <td><input type="text" id="new_username" name="new_username"></td>
             </tr>
             <tr>
-                <td>Nom</td>
+                <td>Nom :</td>
                 <td>{{ session['name'] }}</td>
                 <td><input type="text" id="new_name" name="new_name"></td>
             </tr>
             <tr>
-                <td>Prénom</td>
+                <td>Prénom :</td>
                 <td>{{ session['surname'] }}</td>
                 <td><input type="text" id="new_surname" name="new_surname"></td>
             </tr>
             <tr>
-                <td>Email</td>
+                <td>Email :</td>
                 <td>{{session['email'] }}</td>
                 <td><input type="email" id="new_email" name="new_email"></td>
             </tr>
             <tr>
-                <td>Numéro de téléphone </td>
+                <td>Numéro de téléphone :</td>
                 <td>{{ session['phonenumber'] }}</td>
                 <td><input type="text" id="new_phone" name="new_phone"></td>
             </tr>
             <tr>
-                <td>Mot de passe </td>
+                <td>Mot de passe :</td>
                 <td>*******</td>
                 <td><input type="password" id="new_password" name="new_password"></td>
             </tr>
         </table>
         <br>
-        <input type="submit" class="login-button" value="Enregistrer les modifications">
+        <input type="submit" value="Enregistrer les modifications">
     </form>
 {% endblock %}

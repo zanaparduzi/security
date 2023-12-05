@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2>Page de Connexion</h2>
+    <!-- Votre formulaire de connexion ou tout autre contenu -->
+    <form action="/login2" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Menu</title>
+    <title>Annuaire</title>
+    <meta charset="utf-8">
+    <title>Annuaire</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
 </head>
 <body>
     <h1>Annuaire</h1>
-    <ul>
-        <li><a href="{{ url_for('login') }}">Connexion</a></li>
-        <li><a href="{{ url_for('register') }}">Inscription</a></li>
-        <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
-        <li><a href="{{ url_for('delete_account') }}">Suppression de compte</a></li>
-        <li><a href="{{ url_for('maj_profil') }}">Mise à jour de profil</a></li>
-        <li><a href="{{ url_for('list') }}">Utilisateurs</a></li>
-    </ul>
+    <nav>
+        <a href="{{ url_for('login') }}">Connexion</a>
+        <a href="{{ url_for('register') }}">Inscription</a>
+        <a href="{{ url_for('logout') }}">Déconnexion</a>
+        <a href="{{ url_for('delete_account') }}">Suppression de compte</a>
+        <a href="{{ url_for('maj_profil') }}">Mise à jour de profil</a>
+        <a href="{{ url_for('list') }}">Utilisateurs</a>
+    </nav>
     <div>
         {% block content %}{% endblock %}
     </div>

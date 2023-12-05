@@ -1,15 +1,19 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
 {% extends 'index.html' %}
 
 {% block content %}
     <h2>Page de Connexion</h2>
     <!-- Votre formulaire de connexion ou tout autre contenu -->
     <form action="/login2" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" name="username" required><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="password">Mot de Passe</label>
+        <input type="password" id="password" placeholder="Entrez votre mot de passe" name="password" required><br>
 
-        <input type="submit" value="Login">
+        <input type="submit" class="login-button" value="Login">
     </form>
 {% endblock %}
