@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  webserver:
+    image: nginx:latest
+    ports:
+      - "8082"
+    volumes:
+      - ./web:/usr/share/nginx/html
+
+  client:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - /app
+      - /nginx/mon_site.conf
+    command: ["npm", "start"]
+
+  database:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: new_password
+      MYSQL_DATABASE: Users
+      MYSQL_PASSWORD: new_password
+
+volumes:
+  postgres_data:
