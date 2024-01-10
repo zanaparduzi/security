@@ -32,6 +32,7 @@ def logout():
     return render_template('logout.html') 
 
 # Décorateur pour vérifier l'authentification de l'utilisateur
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

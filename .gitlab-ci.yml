@@ -1,19 +1,7 @@
-stages:
-  - test
-  - build
-  - deploy
-
-test_job:
-  stage: test
-  script:
-    - # Commandes pour exécuter les tests
-
-build_job:
-  stage: build
-  script:
-    - # Commandes pour construire l'application
-
-deploy_job:
+deploy_production:
   stage: deploy
   script:
-    - # Commandes pour déployer l'application sur la VM
+    - echo "Deploying to production"
+    - ssh projet@139.124.86.169 'bash -s' < deployment-script.sh
+  only:
+    - master  # Déclencher le déploiement uniquement sur la branche master
