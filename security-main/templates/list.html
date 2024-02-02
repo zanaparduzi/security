@@ -1,0 +1,222 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
+<h1>Annuaire</h1>
+<nav>
+    <a href="{{ url_for('maj_profil') }}">Mise à jour de profil</a>
+    <a href="{{ url_for('delete_account') }}">Suppression de compte</a>
+    <a href="{{ url_for('logout') }}">Déconnexion</a>
+</nav>
+<h2>Liste des utilisateurs</h2>
+
+
+<form id="searchForm" method="GET">
+    <input type="text" id="searchInput" name="search_query" placeholder="Rechercher un utilisateur...">
+</form>
+<br>
+<table class="userTable" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Admin</th>
+        <th>Supprimer le compte</th>
+        <th>Change Password</th>
+        <th>Upgrade/Downgrade</th>
+    </tr>
+    {% for user in users %}
+    <tr class="userRow">
+        <td>{{ user[0] }}</td>
+        <td>{{ user[1] }}</td>
+        <td>{{ user[2] }}</td>
+        <td>{{ user[3] }}</td>
+        <td>{{ user[5] }}</td>
+        <td>{{ user[6] }}</td>
+        <td>{{ user[7] }}</td>
+        <td>
+            {% if session['admin'] == 2 %}
+            <button class="deleteButton">Supprimer</button>
+            {% endif %}
+        </td>
+        <td>
+            <div class="passwordChange">
+                {% if session['admin'] == 2 %}
+                <input type="password" class="newPasswordInput" placeholder="Nouveau mot de passe">
+                <button class="confirmPasswordChange">OK</button>
+                <span class="passwordChangeMessage" style="display:none">Mot de passe changé avec succès</span>
+                {% endif %}
+            </div>
+        </td>
+        <td>
+            {% if session['admin'] == 2 %}
+            {% if user[7] == 0 %}
+            <button class="downgradeButton" disabled>Downgrade</button>
+            <button class="upgradeButton">Upgrade</button>
+            {% elif user[7] == 1 %}
+            <button class="downgradeButton">Downgrade</button>
+            <button class="upgradeButton" disabled>Upgrade</button>
+            {% else %}
+            <button class="downgradeButton" disabled>Downgrade</button>
+            <button class="upgradeButton" disabled>Upgrade</button>
+            {% endif %}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<div>
+    <table border="1">
+        {% if session['admin'] == 1 or session['admin'] == 2 %}
+        <tr>
+            <th colspan="2">Ajouter un utilisateur</th>
+        </tr>
+        <form action="/add_user" method="POST" enctype="multipart/form-data">
+            <tr>
+                <td><label for="username">Nom d'utilisateur :</label></td>
+                <td><input type="text" id="username" name="username" required></td>
+            </tr>
+            <tr>
+                <td><label for="name">Nom :</label></td>
+                <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td><label for="surname">Prénom :</label></td>
+                <td><input type="text" id="surname" name="surname" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Mot de passe :</label></td>
+                <td><input type="password" id="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email :</label></td>
+                <td><input type="email" id="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="phone">Numéro de téléphone :</label></td>
+                <td><input type="text" id="phone" name="phone" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" class="login-button" value="Ajouter un utilisateur"></td>
+            </tr>
+        </form>
+        {% endif %}
+    </table>
+</div>
+<br>
+<script>
+    function searchUsers(searchQuery) {
+        const userRows = document.getElementsByClassName('userRow');
+
+        for (const row of userRows) {
+            const username = row.children[1].textContent;
+            const name = row.children[2].textContent;
+            const surname = row.children[3].textContent;
+            const email = row.children[4].textContent;
+            const phone = row.children[5].textContent;
+
+            if (
+                username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                surname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                phone.toLowerCase().includes(searchQuery.toLowerCase())
+            ) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    }
+
+    window.onload = function () {
+        const deleteButtons = document.querySelectorAll('.deleteButton');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const userRow = this.parentNode.parentNode;
+                const userId = userRow.cells[0].textContent;
+
+                fetch(`/delete/${userId}`, { method: 'DELETE' })
+                    .then(response => {
+                        if (response.ok) {
+                            userRow.remove();
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        const confirmPasswordChangeButtons = document.querySelectorAll('.confirmPasswordChange');
+
+        confirmPasswordChangeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const newPasswordInput = this.previousElementSibling;
+                const userRow = this.closest('.userRow');
+                const userId = userRow.cells[0].textContent;
+                const newPassword = newPasswordInput.value;
+
+                fetch(`/change_password/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: newPassword })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            newPasswordInput.value = '';
+                            const successMessage = this.nextElementSibling;
+                            successMessage.style.display = 'inline';
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 3000);
+                        } else {
+                            throw new Error('Failed to change password');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        const downgradeButtons = document.querySelectorAll('.downgradeButton');
+        downgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const userRow = this.parentNode.parentNode;
+                const userId = userRow.cells[0].textContent;
+
+                fetch(`/downgrade_user/${userId}`, { method: 'PUT' })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        const upgradeButtons = document.querySelectorAll('.upgradeButton');
+        upgradeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const userRow = this.parentNode.parentNode;
+                const userId = userRow.cells[0].textContent;
+
+                fetch(`/upgrade_user/${userId}`, { method: 'PUT' })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function () {
+            searchUsers(searchInput.value);
+        });
+    };
+
+
+</script>

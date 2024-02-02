@@ -1,0 +1,19 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test_job:
+  stage: test
+  script:
+    - # Commandes pour exécuter les tests
+
+build_job:
+  stage: build
+  script:
+    - # Commandes pour construire l'application
+
+deploy_job:
+  stage: deploy
+  script:
+    - # Commandes pour déployer l'application sur la VM

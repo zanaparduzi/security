@@ -1,0 +1,19 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
+<h1>Annuaire</h1>
+<nav>
+    <a href="{{ url_for('register') }}">Inscription</a>
+</nav>
+<h2>Page de Connexion</h2>
+
+<form action="/login2" method="POST">
+    <label for="username">Nom d'utilisateur</label>
+    <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur" name="username" required><br>
+
+    <label for="password">Mot de Passe</label>
+    <input type="password" id="password" placeholder="Entrez votre mot de passe" name="password" required><br>
+
+    <input type="submit" class="login-button" value="Login">
+</form>

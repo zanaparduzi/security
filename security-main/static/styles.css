@@ -1,0 +1,280 @@
+* {
+    align-items: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-image: url('bg5.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: rgb(112, 69, 164);
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 3em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: color 0.3s ease-in-out;
+}
+
+h1:hover {
+    color: rgb(132, 99, 222);
+}
+
+h2 {
+    color: rgb(112, 69, 164);
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: color 0.3s ease-in-out;
+}
+
+p {
+    text-align: center;
+    margin-left: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(76, 57, 100)
+}
+
+label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(76, 57, 100)
+}
+
+section {
+    padding: 20px;
+}
+
+footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+form {
+    max-width: 800%;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff7e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.login-button {
+    background-color: rgb(100, 65, 157);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+form .login-button:hover {
+    background-color: rgb(172, 136, 223);
+}
+
+form label,
+form input {
+    margin: 10px 0;
+    width: 100%;
+}
+
+form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    background-color: #ffffff7e;
+    border-color: #333;
+}
+
+table {
+    max-width: 800%;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff7e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table .login-button {
+    background-color: rgb(100, 65, 157);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+table .login-button:hover {
+    background-color: rgb(172, 136, 223);
+}
+
+table label,
+table input {
+    margin: 10px 0;
+    width: 100%;
+}
+
+table input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    background-color: #ffffff7e;
+    border-color: #333;
+}
+
+.userTable {
+    max-width: 800%;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff7e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userTable .login-button {
+    background-color: rgb(100, 65, 157);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.userTable .login-button:hover {
+    background-color: rgb(172, 136, 223);
+}
+
+.userTable label,
+.userTable  input {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.userTable input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    background-color: #ffffff7e;
+    border-color: #333;
+}
+
+
+nav {
+    background-color: transparent;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: rgb(112, 69, 164);
+    margin: 0 10px;
+    padding: 4px 8px;
+    text-decoration: none;
+    background-color: transparent;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: rgb(197, 177, 229);
+}
+
+nav {
+    background-color: transparent;
+    padding: 10px;
+}
+
+.nav button:last-child {
+    border-right: none;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #0c3158;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.deleteButton {
+    background-color: rgb(100, 65, 157);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.deleteButton:hover {
+    background-color: rgb(172, 136, 223);
+}
+
+/* Add this to your CSS file or create a new CSS file */
+#flash-messages {
+    margin-bottom: 20px;
+}
+
+.flash-message {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #ffe6e6; /* Light red background color */
+    color: #cc0000; /* Dark red text color */
+    margin-bottom: 10px;
+}

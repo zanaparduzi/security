@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Annuaire</title>
+    <meta charset="utf-8">
+    <title>Annuaire</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
+
+<body>
+    <h1>Annuaire</h1>
+    <nav>
+        <a href="{{ url_for('login') }}">Connexion</a>
+        <a href="{{ url_for('register') }}">Inscription</a>
+        <a href="{{ url_for('maj_profil') }}">Mise à jour de profil</a>
+        <a href="{{ url_for('list') }}">Utilisateurs</a>
+        <a href="{{ url_for('delete_account') }}">Suppression de compte</a>
+        <a href="{{ url_for('logout') }}">Déconnexion</a>
+    </nav>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

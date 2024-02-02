@@ -1,0 +1,19 @@
+{
+  "name": "securite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.py",
+  "scripts": {
+    "test": "python app.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zanaparduzi/security.git"
+  },
+  "author": "zana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zanaparduzi/security/issues"
+  },
+  "homepage": "https://github.com/zanaparduzi/security#readme"
+}

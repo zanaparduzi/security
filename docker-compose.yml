@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  web:
+    image: python:3.8
+    volumes:
+      - ./security-main:/app
+    working_dir: /app
+    command: ["bash", "-c", "pip install -r requirements.txt && python app.py"]
+    ports:
+      - "5000:5000"
+    environment:
+      - MYSQL_HOST=db  # Utilisez le nom du service MySQL comme hôte
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD= 'salome'
+      - MYSQL_DB=Users
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ''  # Assurez-vous que votre MySQL local autorise la connexion sans mot de passe
+      MYSQL_DATABASE: 'Users'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  client:
+    image: nginx:latest
+    volumes:
+      - ./client:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+

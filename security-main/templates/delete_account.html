@@ -1,0 +1,31 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="/static/logo.ico">
+</head>
+<h1>Annuaire</h1>
+<nav>
+    <a href="{{ url_for('maj_profil') }}">Mise à jour de profil</a>
+    <a href="{{ url_for('list') }}">Utilisateurs</a>
+    <a href="{{ url_for('logout') }}">Déconnexion</a>
+</nav>
+
+<h2>Page de suppression du compte</h2>
+<div class="center-button">
+    <button class="deleteButton" id="deleteAccount">Supprimer</button>
+    <script>
+        document.getElementById('deleteAccount').addEventListener('click', function () {
+            fetch('/delete_account2', {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/';
+                    } else {
+                        console.error('Erreur lors de la suppression du compte');
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+        });
+
+    </script>
+</div>
